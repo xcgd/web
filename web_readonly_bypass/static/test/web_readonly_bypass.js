@@ -18,7 +18,7 @@ odoo.define_section('web_readonly_bypass', ['web_readonly_bypass'], function(tes
             data = {};
             instance.web_readonly_bypass.ignore_readonly(data, options,
                 mode_create, context);
-            deepEqual(data,
+            assert.deepEqual(data,
                 {},
                 "Empty context and options mode write"
             );
@@ -31,7 +31,8 @@ odoo.define_section('web_readonly_bypass', ['web_readonly_bypass'], function(tes
                                            'field_3': 'val-3'}};
             instance.web_readonly_bypass.ignore_readonly(data, options,
                 mode_create, context);
-            deepEqual(data,
+
+            assert.deepEqual(data,
                 {'field_1': 'va1-1', 'field_2': false, 'field_3': 'val-3'},
                 "all fields mode write"
             );
@@ -44,7 +45,8 @@ odoo.define_section('web_readonly_bypass', ['web_readonly_bypass'], function(tes
                                            'field_3': 'val-3'}};
             instance.web_readonly_bypass.ignore_readonly(data, options,
                 mode_create, context);
-            deepEqual(data,
+
+            assert.deepEqual(data,
                 {'field_1': 'va1-1', 'field_3': 'val-3'},
                 "all fields mode create (false value are escaped)"
             );
@@ -57,18 +59,19 @@ odoo.define_section('web_readonly_bypass', ['web_readonly_bypass'], function(tes
                                            'field_3': 'val-3'}};
             instance.web_readonly_bypass.ignore_readonly(data, options,
                 mode_create, context);
-            deepEqual(data,
+
+            assert.deepEqual(data,
                 {},
                 "without context, default, we won't save readonly fields"
             );
         });
 
-        test('retrieve_readonly_by_pass_fields', function(instance){
+        test('retrieve_readonly_by_pass_fields', function(assert, instance){
             var context = {'readonly_by_pass': true}
             var options = {'readonly_fields': {'field_1': 'va1-1',
                                                'field_2': 'val-2',
                                                'field_3': 'val-3'}};
-            deepEqual(
+            assert.deepEqual(
                 instance.web_readonly_bypass.retrieve_readonly_by_pass_fields(
                     options, context),
                 {'field_1': 'va1-1', 'field_2': 'val-2', 'field_3': 'val-3'},
@@ -76,7 +79,7 @@ odoo.define_section('web_readonly_bypass', ['web_readonly_bypass'], function(tes
             );
 
             context = {'readonly_by_pass': ['field_1', 'field_3']};
-            deepEqual(
+            assert.deepEqual(
                 instance.web_readonly_bypass.retrieve_readonly_by_pass_fields(
                     options, context),
                 {'field_1': 'va1-1','field_3': 'val-3'},
@@ -84,7 +87,7 @@ odoo.define_section('web_readonly_bypass', ['web_readonly_bypass'], function(tes
             );
 
             context = {'readonly_by_pass': ['field_1',]};
-            deepEqual(
+            assert.deepEqual(
                 instance.web_readonly_bypass.retrieve_readonly_by_pass_fields(
                     options, context),
                 {'field_1': 'va1-1'},
@@ -92,7 +95,7 @@ odoo.define_section('web_readonly_bypass', ['web_readonly_bypass'], function(tes
             );
 
             context = {'readonly_by_pass': []};
-            deepEqual(
+            assert.deepEqual(
                 instance.web_readonly_bypass.retrieve_readonly_by_pass_fields(
                     options, context),
                 {},
@@ -100,7 +103,7 @@ odoo.define_section('web_readonly_bypass', ['web_readonly_bypass'], function(tes
             );
 
             context = null;
-            deepEqual(
+            assert.deepEqual(
                 instance.web_readonly_bypass.retrieve_readonly_by_pass_fields(
                     options, context),
                 {},
@@ -108,7 +111,7 @@ odoo.define_section('web_readonly_bypass', ['web_readonly_bypass'], function(tes
             );
 
             context = false;
-            deepEqual(
+            assert.deepEqual(
                 instance.web_readonly_bypass.retrieve_readonly_by_pass_fields(
                     options, context),
                 {},
@@ -117,7 +120,7 @@ odoo.define_section('web_readonly_bypass', ['web_readonly_bypass'], function(tes
 
             context = {'readonly_by_pass': true}
             options = {'readonly_fields': {'field_1': 'va1-1'}};
-            deepEqual(
+            assert.deepEqual(
                 instance.web_readonly_bypass.retrieve_readonly_by_pass_fields(
                     options, context),
                 {'field_1': 'va1-1'},
@@ -126,7 +129,7 @@ odoo.define_section('web_readonly_bypass', ['web_readonly_bypass'], function(tes
 
 
             options = {'readonly_fields': {}};
-            deepEqual(
+            assert.deepEqual(
                 instance.web_readonly_bypass.retrieve_readonly_by_pass_fields(
                     options, context),
                 {},
@@ -134,7 +137,7 @@ odoo.define_section('web_readonly_bypass', ['web_readonly_bypass'], function(tes
             );
 
             options = {};
-            deepEqual(
+            assert.deepEqual(
                 instance.web_readonly_bypass.retrieve_readonly_by_pass_fields(
                     options, context),
                 {},
@@ -142,7 +145,7 @@ odoo.define_section('web_readonly_bypass', ['web_readonly_bypass'], function(tes
             );
 
             options = null;
-            deepEqual(
+            assert.deepEqual(
                 instance.web_readonly_bypass.retrieve_readonly_by_pass_fields(
                     options, context),
                 {},
@@ -150,7 +153,7 @@ odoo.define_section('web_readonly_bypass', ['web_readonly_bypass'], function(tes
             );
 
             options = false;
-            deepEqual(
+            assert.deepEqual(
                 instance.web_readonly_bypass.retrieve_readonly_by_pass_fields(
                     options, context),
                 {},
@@ -158,7 +161,7 @@ odoo.define_section('web_readonly_bypass', ['web_readonly_bypass'], function(tes
             );
 
             context = false;
-            deepEqual(
+            assert.deepEqual(
                 instance.web_readonly_bypass.retrieve_readonly_by_pass_fields(
                     options, context),
                 {},
