@@ -1,5 +1,7 @@
-openerp.testing.section( 'web_readonly_bypass', {},
-function(test){
+odoo.define_section('web_readonly_bypass', ['web_readonly_bypass'], function(test) {
+        "use strict";
+
+
         test('ignore_readonly', function(instance){
             var data = {};
             var mode_create = true;
