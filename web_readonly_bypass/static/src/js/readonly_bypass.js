@@ -1,9 +1,9 @@
-"use strict";
-(function(){
-    var instance = openerp;
-    var QWeb = instance.web.qweb, _t = instance.web._t;
+odoo.define('web_readonly_bypass', function(require) {
+    'use strict';
 
-    instance.web_readonly_bypass = {
+    var data = require('web.data');
+
+    var readonly_bypass = {
         /**
          * ignore readonly: place options['readonly_fields'] into the data
          * if nothing is specified into the context
@@ -26,7 +26,7 @@
                     }
                 });
             }
-            data = $.extend(data,readonly_by_pass_fields);
+            data = $.extend(data, readonly_by_pass_fields);
         },
 
         /**
@@ -59,9 +59,7 @@
         },
     };
 
-    var readonly_bypass = instance.web_readonly_bypass;
-
-    instance.web.BufferedDataSet.include({
+    data.BufferedDataSet.include({
 
         init : function() {
             this._super.apply(this, arguments);
@@ -101,7 +99,7 @@
 
     });
 
-    instance.web.DataSet.include({
+    data.DataSet.include({
         /*
         BufferedDataSet: case of 'add an item' into a form view
         */
@@ -138,4 +136,7 @@
         },
 
     });
-})();
+
+    return readonly_bypass;
+
+});
