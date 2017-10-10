@@ -2,14 +2,14 @@ odoo.define_section('web_readonly_bypass', ['web_readonly_bypass'], function(tes
         "use strict";
 
 
-        test('ignore_readonly', function(instance){
+        test('ignore_readonly', function(assert, instance){
             var data = {};
             var mode_create = true;
             var options = {};
             var context = {};
             instance.web_readonly_bypass.ignore_readonly(data, options,
                 mode_create, context);
-            deepEqual(data,
+            assert.deepEqual(data,
                 {},
                 "Empty context and options mode create"
             );
