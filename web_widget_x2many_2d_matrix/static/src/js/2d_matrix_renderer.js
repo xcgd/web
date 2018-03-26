@@ -57,10 +57,9 @@ odoo.define('web_widget_x2many_2d_matrix.X2Many2dMatrixRenderer', function (requ
       return $body;
     },
     _renderHeader: function (isGrouped) {
-      var $tr = $('<tr>')
-          .append(_.map(this.columns, this._renderHeaderCell.bind(this)));
-      // wipe 1st column header
-      $tr.find('th:first').empty();
+      // first add y column header, then the data columns, and total if needed
+      var $tr = $('<tr>').append('<th/>');
+      $tr.append(_.map(this.columns, this._renderHeaderCell.bind(this)));
       if (this.matrix_data.show_row_totals) {
         $tr.append($('<th/>', {class: 'total'}));
       }
