@@ -108,7 +108,14 @@ odoo.define('web_widget_x2many_2d_matrix.X2Many2dMatrixRenderer', function (requ
         node.attrs.name = self.matrix_data.field_value;
         return self._renderBodyCell(record, node, index, {mode: 'readonly'});
       });
-      var $tr = $('<tr/>', {class: 'o_data_row'}).append($cells);
+      var $tr = $('<tr/>', {class: 'o_data_row'});
+      // add Y label cell first
+      var value = row.data[0].data[this.matrix_data.field_y_axis];
+      if (value.type == 'record') {
+        value = value.data.display_name;
+      }
+      $tr.append($('<th>').text(value));
+      $tr.append($cells);
       if (row.aggregate) {
         $tr.append(self._renderAggregateRowCell(row));
       }
@@ -137,16 +144,6 @@ odoo.define('web_widget_x2many_2d_matrix.X2Many2dMatrixRenderer', function (requ
         'data-form-id': record.id,
         'data-id': record.data.id,
       });
-      if (colIndex == 0) {
-        var value = record.data[this.matrix_data.field_y_axis];
-        if (value.type == 'record') {
-          // we have a related record
-          value = value.data.display_name;
-        }
-        // get 1st column filled w/ Y label
-        $td.text(value);
-        return $td;
-      }
 
       // We register modifiers on the <td> element so that it gets the correct
       // modifiers classes (for styling)
