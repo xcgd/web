@@ -175,6 +175,7 @@ Contributors
 * Timon Tschanz <timon.tschanz@camptocamp.com>
 * Jairo Llopis <jairo.llopis@tecnativa.com>
 * Dennis Sluijk <d.sluijk@onestein.nl>
+* Vincent Hatakeyama <vincent.hatakeyama@xcg-consulting.fr>
 
 Maintainer
 ----------
