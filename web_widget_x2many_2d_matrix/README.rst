@@ -67,9 +67,13 @@ field_value
 show_row_totals
     If field_value is a numeric field, it indicates if you want to calculate
     row totals. True by default
+    In case of monetary values, it is expected that the currency is the same for
+    all cells; otherwise set this to False.
 show_column_totals
     If field_value is a numeric field, it indicates if you want to calculate
     column totals. True by default
+    In case of monetary values, it is expected that the currency is the same for
+    all cells; otherwise set this to False.
 options: header_cell_max_char
     Will cut header cell text if the length is bigger that the indicated number.
     Default is no maximum.

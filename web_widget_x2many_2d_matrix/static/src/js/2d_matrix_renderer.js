@@ -1,4 +1,5 @@
 /* Copyright 2018 Simone Orsi <simone.orsi@camptocamp.com>
+ * Copyright 2019 Vincent Hatakeyama <vincent.hatakeyama@xcg-consulting.fr>
  * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). */
 
 odoo.define('web_widget_x2many_2d_matrix.X2Many2dMatrixRenderer', function (require) {
@@ -38,6 +39,11 @@ odoo.define('web_widget_x2many_2d_matrix.X2Many2dMatrixRenderer', function (requ
             this.columns = matrixData.columns;
             this.rows = matrixData.rows;
             this.matrix_data = matrixData;
+            if (matrixData.rows.length > 0 && matrixData.rows[0].data.length > 0 && matrixData.rows[0].data[0].data.currency_id) {
+                this.currency_id = matrixData.rows[0].data[0].data.currency_id.res_id;
+            } else {
+                this.currency_id = undefined;
+            }
         },
 
         /**
@@ -488,7 +494,7 @@ odoo.define('web_widget_x2many_2d_matrix.X2Many2dMatrixRenderer', function (requ
             var field = this.state.fields[aggregate.fname],
                 formatter = field_utils.format[field.type];
             var formattedValue = formatter(
-                aggregate.value, field, {escape: true}
+                aggregate.value, field, {escape: true, currency_id: this.currency_id}
             );
             $cell.addClass('total').attr('title', aggregate.help)
                 .html(formattedValue);
