@@ -106,8 +106,10 @@ odoo.define("web_advanced_search", function (require) {
                     readonly: false,
                 }
             );
-            // Add 1st domain node by default
-            domain_selector_dialog.domainSelector._onAddFirstButtonClick();
+            domain_selector_dialog.opened(function () {
+                // Add 1st domain node by default
+                domain_selector_dialog.domainSelector._onAddFirstButtonClick();
+            });
             return domain_selector_dialog.open();
         },
 
@@ -177,7 +179,14 @@ odoo.define("web_advanced_search", function (require) {
                 },
             };
             // See https://stackoverflow.com/a/11508530/1468388
-            params.fields[this.field.name] = _.omit(this.field, "onChange");
+            // to know how to include this in the previous step in ES6
+            params.fields[this.field.name] = _.omit(
+                this.field,
+                // User needs all records, to actually produce a new domain
+                "domain",
+                // Onchanges make no sense in this context, there's no record
+                "onChange"
+            );
             if (this.field.type.endsWith("2many")) {
                 // X2many fields behave like m2o in the search context
                 params.fields[this.field.name].type = "many2one";
