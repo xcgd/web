@@ -65,6 +65,7 @@ odoo.define("web_widget_x2many_2d_matrix.widget", function (require) {
                     ? "1"
                     : ""
             );
+            this.label_row_totals = node.label_row_totals || "";
             this.show_column_totals = this.parse_boolean(
                 node.show_column_totals ||
                     this.is_aggregatable(field_defs[this.field_value])
@@ -132,6 +133,7 @@ odoo.define("web_widget_x2many_2d_matrix.widget", function (require) {
                 columns: this.columns,
                 rows: this.rows,
                 show_row_totals: this.show_row_totals,
+                label_row_totals: this.label_row_totals,
                 show_column_totals: this.show_column_totals,
             };
         },

@@ -1,0 +1,22 @@
+diff --git a/web_widget_x2many_2d_matrix/static/src/js/2d_matrix_renderer.js b/web_widget_x2many_2d_matrix/static/src/js/2d_matrix_renderer.js
+index f37952bc6..a63260544 100644
+--- a/web_widget_x2many_2d_matrix/static/src/js/2d_matrix_renderer.js
++++ b/web_widget_x2many_2d_matrix/static/src/js/2d_matrix_renderer.js
+@@ -143,6 +143,17 @@ odoo.define("web_widget_x2many_2d_matrix.X2Many2dMatrixRenderer", function (requ
+             var ths = [];
+             if (this.matrix_data.show_row_totals) {
+                 var $th = $("<th>", {class: "total"});
++                var field = this.state.fields[this.matrix_data.field_value];
++                // Same classes added by _renderHeaderCell
++                if (
++                    field.type === "float" ||
++                    field.type === "integer" ||
++                    field.type === "monetary"
++                ) {
++                    $th.addClass("text-right");
++                } else {
++                    $th.addClass("text-center");
++                }
+                 // label_row_totals contains either something or ''
+                 $th.append(this.matrix_data.label_row_totals).append('</th>');
+                 ths.push($th);
