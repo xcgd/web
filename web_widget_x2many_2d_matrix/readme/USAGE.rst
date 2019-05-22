@@ -35,6 +35,9 @@ show_row_totals
 show_column_totals
     If field_value is a numeric field, it indicates if you want to calculate
     column totals. True by default
+label_row_totals                                                                                                                                                                                                                  95%
+    If show_row_totals is True, this will allow to set a column label for the
+    totals column. Default to "".
 
 Example
 ~~~~~~~
