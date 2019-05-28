@@ -77,6 +77,9 @@ show_column_totals
     column totals. True by default
     In case of monetary values, it is expected that the currency is the same for
     all cells; otherwise set this to False.
+options: row_totals_location
+    Indicate where to place the totals column. Can be second (after description)
+    or last. Default to last.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
