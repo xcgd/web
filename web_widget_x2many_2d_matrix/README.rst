@@ -83,6 +83,9 @@ options: header_cell_max_char
 options: label_cell_max_char
     Will cut label cell text if the length is bigger that the indicated number.
     Default is no maximum.
+options: row_totals_location
+    Indicate where to place the totals column. Can be second (after description)
+    or last. Default to last.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
