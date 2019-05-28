@@ -107,6 +107,9 @@ show_column_totals
 label_row_totals
     If show_row_totals is True, this will allow to set a column label for the
     totals column. Default to "".
+row_totals_location
+    Indicate where to place the totals column. Can be second (after description)
+    or last. Default to last.
 
 Example
 ~~~~~~~
