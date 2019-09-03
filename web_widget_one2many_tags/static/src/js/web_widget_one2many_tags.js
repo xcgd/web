@@ -16,5 +16,5 @@ odoo.define('web_widget_one2many_tags.One2ManyTags', function (require) {
     });
 
     // Relational field
-    registry.add('one2many_tags', relational_fields.FieldOne2ManyTags);
+    registry.add('one2many_tags', relational_fields.FieldMany2ManyTags);
 });
