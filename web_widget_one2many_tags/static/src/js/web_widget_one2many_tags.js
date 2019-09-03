@@ -10,13 +10,11 @@ odoo.define('web_widget_one2many_tags.One2ManyTags', function (require) {
     var relational_fields = require('web.relational_fields');
     var _t = core._t;
 
-    var FieldOne2ManyTags = relational_fields.FieldMany2ManyTags.extend({
-        tag_template: "FieldOne2ManyTag",
-        className: "o_field_one2manytags",
-        supportedFieldTypes: ['one2many'],
-
+    relational_fields.FieldMany2ManyTags.include({
+        supportedFieldTypes: ['many2many', 'one2many'],
+        // Todo: Plan to add a filter for one2many field.
     });
 
     // Relational field
-    registry.add('one2many_tags', FieldOne2ManyTags);
+    registry.add('one2many_tags', relational_fields.FieldOne2ManyTags);
 });
