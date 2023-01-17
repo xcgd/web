@@ -1,5 +1,6 @@
 /* Copyright 2018 Simone Orsi <simone.orsi@camptocamp.com>
  * Copyright 2018 Brainbean Apps
+ * Copyright 2019 Vincent Hatakeyama <vincent.hatakeyama@xcg-consulting.fr>
  * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). */
 
 odoo.define("web_widget_x2many_2d_matrix.X2Many2dMatrixRenderer", function (require) {
@@ -40,6 +41,15 @@ odoo.define("web_widget_x2many_2d_matrix.X2Many2dMatrixRenderer", function (requ
             this.columns = matrixData.columns;
             this.rows = matrixData.rows;
             this.matrix_data = matrixData;
+            if (
+                matrixData.rows.length > 0 &&
+                matrixData.rows[0].data.length > 0 &&
+                matrixData.rows[0].data[0].data.currency_id
+            ) {
+                this.currency_id = matrixData.rows[0].data[0].data.currency_id.res_id;
+            } else {
+                this.currency_id = undefined;
+            }
         },
 
         /**
@@ -113,11 +123,31 @@ odoo.define("web_widget_x2many_2d_matrix.X2Many2dMatrixRenderer", function (requ
          */
         _renderHeader: function () {
             var $tr = $("<tr>").append("<th/>");
+            if (this.matrix_data.row_totals_location == "second") {
+                $tr.append(this._renderHeaderSpecial());
+            }
             $tr = $tr.append(_.map(this.columns, this._renderHeaderCell.bind(this)));
-            if (this.matrix_data.show_row_totals) {
-                $tr.append($("<th/>", {class: "total"}));
+            if (this.matrix_data.row_totals_location == "last") {
+                $tr.append(this._renderHeaderSpecial());
             }
             return $("<thead>").append($tr);
+        },
+
+        /**
+         * Render the special headers of our matrix, like row totals
+         *
+         * @private
+         * @returns {jQueryElement} a list of elements
+         */
+        _renderHeaderSpecial: function () {
+            var ths = [];
+            if (this.matrix_data.show_row_totals) {
+                var $th = $("<th>", {class: "total"});
+                // label_row_totals contains either something or ''
+                $th.append(this.matrix_data.label_row_totals).append('</th>');
+                ths.push($th);
+            }
+            return ths;
         },
 
         /**
@@ -199,6 +229,9 @@ odoo.define("web_widget_x2many_2d_matrix.X2Many2dMatrixRenderer", function (requ
             var $tr = $("<tr/>", {class: "o_data_row"}),
                 _data = _.without(row.data, undefined);
             $tr = $tr.append(this._renderLabelCell(_data[0]));
+            if (this.matrix_data.row_totals_location == "second") {
+                $tr.append(this._renderRowSpecial(row));
+            }
             var $cells = this.columns.map(
                 function (column, index) {
                     var record = row.data[index];
@@ -208,12 +241,26 @@ odoo.define("web_widget_x2many_2d_matrix.X2Many2dMatrixRenderer", function (requ
                 }.bind(this)
             );
             $tr = $tr.append($cells);
-            if (row.aggregate) {
-                $tr.append(this._renderAggregateRowCell(row));
+            if (this.matrix_data.row_totals_location == "last") {
+                $tr.append(this._renderRowSpecial(row));
             }
             return $tr;
         },
 
+        /**
+         * Render the special cell of our matrix, like row totals
+         *
+         * @private
+         * @param {Object} row The row that will be rendered.
+         * @returns {jQueryElement} a list of elements
+         */
+        _renderRowSpecial: function (row) {
+            var trs = [];
+            if (row.aggregate) {
+                trs.push(this._renderAggregateRowCell(row));
+            }
+            return trs;
+        },
         /**
          * Renders the label for a specific row.
          *
@@ -519,7 +566,10 @@ odoo.define("web_widget_x2many_2d_matrix.X2Many2dMatrixRenderer", function (requ
             var fieldInfo = this.state.fieldsInfo.list[axis.attrs.name];
             var formatFunc =
                 field_utils.format[fieldInfo.widget ? fieldInfo.widget : field.type];
-            var formattedValue = formatFunc(value, field, {escape: true});
+            var formattedValue = formatFunc(value, field, {
+                escape: true,
+                currency_id: this.currency_id,
+            });
             $cell.addClass("o_list_number").attr("title", help).html(formattedValue);
         },
 

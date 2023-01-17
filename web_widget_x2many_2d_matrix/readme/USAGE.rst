@@ -32,9 +32,19 @@ field_value
 show_row_totals
     If field_value is a numeric field, it indicates if you want to calculate
     row totals. True by default
+    In case of monetary values, it is expected that the currency is the same for
+    all cells; otherwise set this to False.
 show_column_totals
     If field_value is a numeric field, it indicates if you want to calculate
     column totals. True by default
+    In case of monetary values, it is expected that the currency is the same for
+    all cells; otherwise set this to False.
+label_row_totals                                                                                                                                                                                                                  95%
+    If show_row_totals is True, this will allow to set a column label for the
+    totals column. Default to "".
+row_totals_location
+    Indicate where to place the totals column. Can be second (after description)
+    or last. Default to last.
 
 Example
 ~~~~~~~
