@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Add demo gantt view on crons so we can showcase this module without projects / tasks. -->
+    <record id="ir_cron_jsgantt" model="ir.ui.view">
+        <field name="model">ir.cron</field>
+        <field name="type">jsgantt</field>
+        <field name="arch" type="xml">
+            <jsgantt show_duration="false">
+                <field name="name" mapping="name" />
+                <field name="nextcall" mapping="start_date" />
+                <field name="user_id" mapping="resource_id" />
+            </jsgantt>
+        </field>
+    </record>
+    <!-- Append our view_mode this way to avoid overwriting changes done by other modules. -->
+    <function model="ir.actions.act_window" name="write">
+        <value eval="[ref('base.ir_cron_act')]" />
+        <value
+            model="ir.actions.act_window"
+            eval="{'view_mode': obj().env.ref('base.ir_cron_act').view_mode + ',jsgantt'}"
+        />
+    </function>
+</odoo>

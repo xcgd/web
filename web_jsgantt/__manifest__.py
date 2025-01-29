@@ -6,18 +6,17 @@
     "name": "JSGantt View",
     "summary": "Add a Gantt view type using jsgantt-improved",
     "version": "16.0.1.0.0",
-    "category": "Web",
+    "category": "Hidden",
     "website": "https://github.com/OCA/web",
-    "author": "Coop IT Easy SC, Odoo Community Association (OCA)",
+    "author": "Coop IT Easy SC, XCG Consulting, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "development_status": "Alpha",
-    "depends": [
-        "web",
-    ],
+    "depends": ["web"],
     "assets": {
         "web.assets_backend": [
             "web_jsgantt/static/lib/jsgantt-improved/dist/*",
             "web_jsgantt/static/src/views/**/*",
         ],
     },
+    "demo": ["demo/ir_cron_view.xml"],
 }

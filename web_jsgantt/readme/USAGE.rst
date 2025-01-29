@@ -96,3 +96,8 @@ attribute.
 
 ``bar_text``
     The text to display on the task bar. (``Char``)
+
+Examples
+~~~~~~~~
+
+See ``demo/ir_cron_view.xml`` for a very basic gantt view example added onto cron tasks.
