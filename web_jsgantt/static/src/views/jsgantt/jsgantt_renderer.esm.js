@@ -225,6 +225,12 @@ export class JSGanttRenderer extends Component {
                 }
                 task[jsTaskField] = value;
             }
+            // Display tasks without end as milestones which look better than single vertical
+            // bars; their duration is also better handled.
+            if (task.pStart && !task.pEnd) {
+                task.pEnd = task.pStart;
+                task.pMile = 1;
+            }
             task.pClass = this.computeTaskClass(task);
             this.chart.AddTaskItemObject(task);
         }
