@@ -39,5 +39,5 @@ export class JSGanttController extends Component {
     }
 }
 
-JSGanttController.template = "web_view_jsgantt.JSGanttView";
+JSGanttController.template = "web_jsgantt.JSGanttView";
 JSGanttController.components = {Layout};

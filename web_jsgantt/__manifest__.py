@@ -16,8 +16,8 @@
     ],
     "assets": {
         "web.assets_backend": [
-            "web_view_jsgantt/static/lib/jsgantt-improved/dist/*",
-            "web_view_jsgantt/static/src/views/**/*",
+            "web_jsgantt/static/lib/jsgantt-improved/dist/*",
+            "web_jsgantt/static/src/views/**/*",
         ],
     },
 }

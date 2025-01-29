@@ -250,4 +250,4 @@ export class JSGanttRenderer extends Component {
     }
 }
 
-JSGanttRenderer.template = "web_view_jsgantt.JSGanttRenderer";
+JSGanttRenderer.template = "web_jsgantt.JSGanttRenderer";
