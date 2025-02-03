@@ -1,0 +1,8 @@
+/* Tone down z-index=10000 from the jsgantt-improved lib so other Odoo elements can still show up
+ * on top of them, especially search filters (z-index=1000) & OCA web_responsive (z-index=200). */
+.JSGanttToolTip {
+    z-index: 100;
+}
+.gtaskbarcontainer.gplan {
+    z-index: 100;
+}

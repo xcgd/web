@@ -16,6 +16,7 @@
         "web.assets_backend": [
             "web_jsgantt/static/lib/jsgantt-improved/dist/*",
             "web_jsgantt/static/src/views/**/*",
+            "web_jsgantt/static/src/scss/web_jsgantt.scss",
         ],
     },
     "demo": ["demo/ir_cron_view.xml"],
