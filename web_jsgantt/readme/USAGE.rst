@@ -1,3 +1,9 @@
+Using the JSGantt View and Widget
+=================================
+
+JSGantt View
+------------
+
 To use the jsgantt view on a model, a view of that type must be defined for
 that model. The root element of the view is ``<jsgantt>`` and it should
 contain multiple ``<field>`` elements.
@@ -36,8 +42,32 @@ Each ``<field>`` element can have the following attributes:
 To make the view available, the ``jsgantt`` view mode must be added to the
 list of view modes (``view_mode`` field) of the window action.
 
+JSGantt Widget
+--------------
+
+The JSGantt widget can be used to display a Gantt chart within a form view for a ``many2many`` field. This allows you to visualize related records (e.g., tasks, subtasks, or dependencies) directly within the context of a single record.
+
+To use the JSGantt widget, add a ``<field>`` element in a form view with the ``widget="jsgantt"`` attribute. The field must be a ``many2many`` field, and the related model must have fields that can be mapped to the internal task fields (see "Internal task field names" below).
+
+The ``<field>`` element can have the following attributes when using the ``jsgantt`` widget:
+
+``name``
+   The name of the ``many2many`` field as defined by the model. This is mandatory.
+
+``widget``
+   Must be set to ``jsgantt`` to use the JSGantt widget.
+
+``time_format``
+   The time scale to use for the Gantt chart. Possible values are: ``hour``, ``day``, ``week``, ``month``, and ``quarter``. Defaults to ``day``.
+
+``show_duration``
+   Whether to display duration information in the chart. Accepts ``true`` or ``false``. Defaults to ``true``. Set to ``false`` to hide duration.
+
+``caption_type``
+   Specifies which task field to display as a caption next to the task bars. Possible values are ``none``, ``caption``, ``resource_id``, ``duration``, ``completion``. Defaults to ``none``.
+
 Internal task field names
-~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------
 
 Here are the names of the internal fields used to display the Gantt chart.
 Internally, the Gantt chart sees each record as a task, and these are its
