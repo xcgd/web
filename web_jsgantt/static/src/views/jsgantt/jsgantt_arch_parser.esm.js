@@ -10,7 +10,6 @@ export class JSGanttArchParser extends XMLParser {
   }
 
   parse(arch, models, modelName) {
-    debugger;
     this.parseXML(arch);
     const fieldNodes = {};
     const activeFields = {};

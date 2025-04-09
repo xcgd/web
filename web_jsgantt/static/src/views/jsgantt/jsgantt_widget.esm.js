@@ -45,11 +45,7 @@ export class JSGanttWidget extends Component {
     const lang = this.env.services.user.lang;
     this.chart.setLang(lang);
 
-    // Set up click event handler to open project.task records
-    // Note: As this widget is designed to work with project.task records,
-    // we set up a click event handler on each Gantt chart row. When a
-    // user clicks a row representing a task record, we call doAction to
-    // open the form view of the corresponding project.task record.
+    // Set up click event handler to open records
     this.chart.setEventClickRow((task) => this.openTaskRecord(task));
   }
 
@@ -73,7 +69,7 @@ export class JSGanttWidget extends Component {
 
     await this.actionService.doAction({
       type: "ir.actions.act_window",
-      res_model: "project.task", // Hardcode to project.task
+      res_model: this.props.resModel,
       res_id: resId,
       views: [[false, "form"]], // Open in form view
       target: "current", // Open in the current window
@@ -91,7 +87,6 @@ export class JSGanttWidget extends Component {
     this.records.forEach((record) => {
       taskMap.set(record.resId, record);
     });
-
     for (const record of this.records) {
       const task = processTaskData(record);
       // Validate and fix pParent
