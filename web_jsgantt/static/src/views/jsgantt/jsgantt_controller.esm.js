@@ -29,7 +29,7 @@ export class JSGanttController extends Component {
   async openRecord(record) {
     const action = await this.orm.call(
       this.props.resModel,
-      "get_formview_action",
+      (this.archInfo.openTaskClick ) ? this.archInfo.openTaskClick : "get_formview_action",
       [[record.resId]],
       {
         context: this.props.context,

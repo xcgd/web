@@ -5,7 +5,7 @@
 {
     "name": "JSGantt View",
     "summary": "Add a Gantt view type using jsgantt-improved",
-    "version": "16.0.2.0.0",
+    "version": "16.0.2.0.1",
     "category": "Hidden",
     "website": "https://github.com/OCA/web",
     "author": "Coop IT Easy SC, XCG Consulting, Odoo Community Association (OCA)",

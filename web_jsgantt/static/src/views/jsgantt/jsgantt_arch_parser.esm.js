@@ -16,6 +16,7 @@ export class JSGanttArchParser extends XMLParser {
     let timeFormat = null;
     let showDuration = null;
     let captionType = null;
+    let openTaskClick = null;
     this.visitXML(arch, (node) => {
       if (node.tagName === "jsgantt") {
         timeFormat = node.getAttribute("time_format");
@@ -23,6 +24,7 @@ export class JSGanttArchParser extends XMLParser {
           node.getAttribute("show_duration") || "true",
         );
         captionType = node.getAttribute("caption_type");
+        openTaskClick = node.getAttribute("on_task_click");
       } else if (node.tagName === "field") {
         const fieldInfo = this.parseFieldNode(node, models, modelName);
         fieldNodes[fieldInfo.name] = fieldInfo;
@@ -42,6 +44,7 @@ export class JSGanttArchParser extends XMLParser {
       timeFormat,
       showDuration,
       captionType,
+      openTaskClick,
     };
   }
 }

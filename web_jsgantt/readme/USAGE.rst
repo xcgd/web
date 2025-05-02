@@ -23,6 +23,12 @@ The ``<jsgantt>`` root element can have the following attributes:
    chart task bars. Possible values are ``none``, ``caption``,
    ``resource_id``, ``duration``, ``completion``. Defaults to ``none``.
 
+``on_task_click``
+   Specifies the method name to call on the model when a task is clicked in the Gantt chart.
+   This allows customizing the navigation behavior when users click on a task bar.
+   If not specified, the default ``get_formview_action`` method will be called.
+   Example: ``on_task_click="open_record"`` will call the ``open_record`` method on the model.
+
 Each ``<field>`` element can have the following attributes:
 
 ``name``
