@@ -15,6 +15,7 @@ export const FIELDS_MAPPING = [
   ["pParent", "parent_id", "many2one_id"],
   ["pOpen", "is_expanded", "integer"],
   ["pDepend", "dependency_ids", "many2many"],
+  ["pClass", "class"],
   ["pCaption", "caption"],
   ["pNotes", "notes"],
   ["pCost", "cost"],
@@ -103,7 +104,7 @@ export function processTaskData(record, fieldsMapping = {}) {
     task.pMile = 1;
   }
 
-  task.pClass = computeTaskClass(task);
+  task.pClass = (task.pClass) ? task.pClass : computeTaskClass(task);
   return task;
 }
 
